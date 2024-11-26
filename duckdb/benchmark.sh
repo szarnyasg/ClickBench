@@ -11,11 +11,9 @@ pip install --break-system-packages duckdb==1.1.3 psutil
 wget --no-verbose --continue 'https://datasets.clickhouse.com/hits_compatible/hits.csv.gz'
 gzip -d hits.csv.gz
 
-./load.py
-
 # Run the queries
 
-./run.sh 2>&1 | tee log.txt
+./query.py 2>&1 | tee log.txt
 
 wc -c my-db.duckdb
 
