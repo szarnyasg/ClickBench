@@ -2,7 +2,6 @@
 
 import duckdb
 import timeit
-import psutil
 import sys
 
 query = sys.stdin.read()

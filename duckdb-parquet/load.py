@@ -2,7 +2,6 @@
 
 import duckdb
 import timeit
-import psutil
 
 con = duckdb.connect(database="my-db.duckdb", read_only=False)
 
