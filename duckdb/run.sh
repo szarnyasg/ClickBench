@@ -4,7 +4,9 @@ TRIES=3
 
 cat queries.sql | while read -r query; do
     sync
-    if [ "$(uname)" != "Darwin" ]; then
+    if [ "$(uname)" == "Darwin" ]; then
+      sudo purge
+    else
       echo 3 | sudo tee /proc/sys/vm/drop_caches > /dev/null
     fi
 
