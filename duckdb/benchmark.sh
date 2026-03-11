@@ -7,20 +7,22 @@ export HOME=${HOME:=~}
 curl https://install.duckdb.org | sh
 export PATH=$HOME'/.duckdb/cli/latest':$PATH
 
-# Load the data
-wget --continue --progress=dot:giga 'https://datasets.clickhouse.com/hits_compatible/hits.parquet'
-
 if [ "$(uname)" == "Darwin" ]; then
     # macOS
     TIME_COMMAND="command gtime -f '%e'"
     GREP_COMMAND="ggrep"
     SED_COMMAND="gsed"
+    # trigger the sudo password prompt
+    sudo ls
 else
     # Linux
     TIME_COMMAND="command time -f '%e'"
     GREP_COMMAND="grep"
     SED_COMMAND="sed"
 fi
+
+# Load the data
+wget --continue --progress=dot:giga 'https://datasets.clickhouse.com/hits_compatible/hits.parquet'
 
 echo -n "Load time: "
 ${TIME_COMMAND} duckdb hits.db -storage_version latest -f create.sql -f load.sql
