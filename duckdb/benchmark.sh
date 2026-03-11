@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 # Install
 export HOME=${HOME:=~}
 curl https://install.duckdb.org | sh
