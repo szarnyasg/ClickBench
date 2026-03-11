@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -euo pipefail
 TRIES=3
 
 cat queries.sql | while read -r query; do
@@ -12,6 +13,10 @@ cat queries.sql | while read -r query; do
 
     echo "$query";
     cli_params=()
+    cli_params+=("-c")
+    cli_params+=("set threads=4")
+    cli_params+=("-c")
+    cli_params+=("set max_memory='5g'")
     cli_params+=("-c")
     cli_params+=(".timer on")
     for i in $(seq 1 $TRIES); do
